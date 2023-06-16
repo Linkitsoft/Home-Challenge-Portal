@@ -34,7 +34,7 @@ const DateFilter = ({ setModal }) => {
               <input type="date" placeholder="Date" />
             </div>
 
-            <div className="dateFilter_selectWrap">
+            {/* <div className="dateFilter_selectWrap">
               <p>Category</p>
               <select>
                 <option>All</option>
@@ -46,7 +46,7 @@ const DateFilter = ({ setModal }) => {
               <select>
                 <option>All</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="dateFilter_reset">
               <div>{/* <p>Reset</p> */}</div>

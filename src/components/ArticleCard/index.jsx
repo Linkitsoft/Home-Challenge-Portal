@@ -1,29 +1,64 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const ArticleCards = ({ item }) => {
+
+const ArticleCards = ({ item, source }) => {
+  
+   console.log("item ==========================> ", item)
+
+  // handle link new york
+  const handleLink = () => {
+     window.open(item?.web_url)
+  }
+
+  // handle link the guardians
+  const handleGuardians = () => {
+    window.open(item?.webUrl)
+  }
+
   return (
-    <div className="article_all">
-      <div className="article_content">
+    <div style={{ cursor: "pointer" }} onClick={ source == 2 ? handleGuardians :  handleLink} className="article_all">
+      {source === 2 ? <div className="article_content">
         <div className="article_layout">
           <div className="article_top">
             <div className="circle">
               <i className="fas fa-save"></i>
             </div>
-            <p>Article #{item.id}</p>
+            {/* <p>Article #{item.id}</p> */}
           </div>
           <div className="corner">
-            <p>2023-11-10</p>
+            <p>{item?.webPublicationDate}</p>
           </div>
         </div>
-        <p className="article_title">{item.title}</p>
-        <p className="article_desc">{item.description}</p>
+        <p className="article_title">{item?.webTitle}</p>
+        <p className="article_desc">{item?.description}</p>
         <div className="article_bottom">
-          <p className="name">{item.author}</p>
-          <p className="role">{item.designation}</p>
+          <p className="name"> Type : {item?.type}</p>
+          {/* <p className="role">{item.designation}</p> */}
         </div>
-      </div>
+      </div> : <div className="article_content">
+        <div className="article_layout">
+          <div className="article_top">
+            <div className="circle">
+              <i className="fas fa-save"></i>
+            </div>
+            {/* <p>Article #{item.id}</p> */}
+          </div>
+          <div className="corner">
+            <p>{item?.pub_date}</p>
+          </div>
+        </div>
+        <p className="article_title">{item?.headline?.main}</p>
+        <p className="article_desc">{item?.abstract}</p>
+        <div className="article_bottom">
+          <p className="name"> Author : {item?.source}</p>
+          {/* <p className="role">{item.designation}</p> */}
+        </div>
+      </div>}
+
+
     </div>
+
   );
 };
 

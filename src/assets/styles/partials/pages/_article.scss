@@ -77,6 +77,12 @@
       outline: 1px solid rgb(247, 247, 247);
       border-radius: 4px;
     }
+
+    select {
+      padding: 5px 20px;
+      margin : 0px 10px;
+      outline: none;
+    }
   }
 
   &_search {
@@ -132,7 +138,6 @@
     border: none;
     font-weight: 700;
     position: relative;
-    bottom: 5px;
   }
 
   &_create:hover {
@@ -235,6 +240,7 @@
         padding: 10px;
       }
     }
+
     &_left {
       input {
         width: 70%;
@@ -289,6 +295,7 @@
     border-radius: 10px;
     margin-top: 30px;
   }
+
   &_btn:hover {
     background-color: #1d3f21;
   }

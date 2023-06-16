@@ -38,14 +38,14 @@ const Sidebar = ({ index }) => {
             >
               <i className="fas fa-newspaper"></i>Articles
             </div>
-            <div
+            {/* <div
               onClick={() => handleRoute("newsFeed")}
               className={
                 index === 1 ? "sideBar_title sideBar_active" : "sideBar_title"
               }
             >
                <i className="fas fa-newspaper"></i>News Feed
-            </div>
+            </div> */}
 
             <div
               onClick={() => handleRoute("logout")}
