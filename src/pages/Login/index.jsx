@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import instance from "../../Instance/instance";
 
 const Login = () => {
   const [eyeIcon, setEyeIcon] = useState(false);
@@ -13,16 +14,26 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
+    const body = {
+      email: formData?.email,
+      password: formData?.password
+    }
     if (!formData.email || !formData.password) {
       toast.error("All fields are required");
     } else if (!formData?.email?.match(regexEmail)) {
       setEmailValid(true);
     } else {
-      window.localStorage.setItem("isLogged", "authorize");
-      window.location.reload(true);
+      const res = await instance.post("signin", body)
+      if (res?.data?.response) {
+        window.localStorage.setItem("isLogged", "authorize");
+        window.localStorage.setItem("token", res?.data?.token);
+        window.location.reload();
+        navigate("/articles")
+      }else if(res?.data?.message === "Invalid User Credentials"){
+        toast.error("Invalid User Credentials")
+      }
     }
   };
 
@@ -43,11 +54,11 @@ const Login = () => {
             />
           </div>
 
-        {emailValid && (
-          <div className="login_emailValid">
-            <p>* Email is not Valid *</p>{" "}
-          </div>
-        )}
+          {emailValid && (
+            <div className="login_emailValid">
+              <p>* Email is not Valid *</p>{" "}
+            </div>
+          )}
 
           <label className="login_label">Password</label>
           <div className="login_inputWrapper">

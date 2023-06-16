@@ -35,9 +35,14 @@ const Signup = () => {
     } else if (!formData?.email?.match(regexEmail)) {
       setEmailValid(true);
     } else {
-      const res = await instance.post("/signUp", body);
-      console.log("res", res) 
-      // navigate("/login");
+      const res = await instance.post("signUp", body);
+      if (res?.data?.message === "User registered Successfully.") {
+        navigate("/login");
+        toast.success("User registered Successfully")
+      } if (res?.data?.message === "User already exists.") {
+        toast.warning("User already exists")
+      }
+      console.log("res", res)
     }
   };
 
