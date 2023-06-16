@@ -1,0 +1,61 @@
+.background {
+    background-size: cover;
+    background-position: bottom;
+    min-height: 100vh;
+    position: relative;
+    background-color: #F7F7F7;
+}
+
+.mainLayout {
+    display: flex;
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+    width: 100%;
+
+    &_parent {
+        display: flex;
+        width: 100%;
+
+    }
+}
+
+// .Toastify__toast-container {
+//     width: 40% !important;
+// }
+
+p {
+    margin-bottom: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #aaaaaa;
+    border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 0;
+    }
+
+    ::-webkit-scrollbar {
+        height: 0;
+    }
+}

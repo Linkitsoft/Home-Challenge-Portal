@@ -1,0 +1,15 @@
+// BASE
+@import "./partials/base/typography";
+@import "./partials/base/general";
+
+// COMPONENTS
+@import "./partials/components/loader";
+@import "./partials/components/sidebar";
+
+// MODALS
+@import "./partials/modal/addArticle";
+@import "./partials/modal/dateFilter";
+
+// PAGES
+@import "./partials/pages/login";
+@import "./partials/pages/article";

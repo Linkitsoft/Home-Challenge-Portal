@@ -1,0 +1,240 @@
+.addArticle {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(34, 34, 34, 0.486);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+    /* width */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .cross {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: grey;
+      cursor: pointer;
+    }
+  
+    &_inner {
+      width: 800px;
+    //   height: 830px;
+      background-color: white;
+      border-radius: 10px;
+      overflow-y: scroll;
+    }
+  
+    &_topHead {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 30px 0px;
+      flex-direction: column;
+  
+      p {
+        font-weight: bold;
+        font-size: 22px;
+        color: #393939;
+      }
+    }
+  
+    &_imgWrap {
+      position: relative;
+      width: 50%;
+      padding: 10px 10px;
+      display: flex;
+      justify-content: center;
+  
+      img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+  
+      input {
+        position: absolute;
+        top: 2px;
+        z-index: 99;
+        width: 61%;
+        height: 200px;
+        opacity: 0;
+        cursor: pointer;
+      }
+    }
+  
+    &_wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    &_inputWrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin: 5px 0px;
+  
+      div {
+        display: flex;
+        flex-direction: column;
+        margin: 0px 20px;
+      }
+  
+      label {
+        margin: 5px 0px;
+        color: #4f4f4f;
+        font-weight: bold;
+      }
+  
+      input {
+        padding: 10px 10px;
+        border: 1px solid #88888883;
+        outline: none;
+        border-radius: 5px;
+      }
+  
+      select {
+        padding: 10px 10px;
+        border: 1px solid #88888883;
+        outline: none;
+        border-radius: 5px;
+      }
+    }
+  
+    &_inputWrapperFull {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      margin: 5px 0px;
+  
+      div {
+        display: flex;
+        flex-direction: column;
+        margin: 0px 20px;
+      }
+  
+      label {
+        margin: 5px 0px;
+        color: #4f4f4f;
+        font-weight: bold;
+      }
+  
+      input {
+        padding: 10px 10px;
+        border: 1px solid #88888883;
+        outline: none;
+        border-radius: 5px;
+      }
+  
+      select {
+        padding: 10px 10px;
+        border: 1px solid #88888883;
+        outline: none;
+        border-radius: 5px;
+      }
+    }
+  
+    &_teamList {
+      display: flex;
+      flex-direction: column;
+  
+      P {
+        margin: 0;
+        color: #4f4f4f;
+        font-weight: bold;
+      }
+  
+      div {
+        display: flex;
+        margin: 10px 0px;
+        flex-direction: row;
+  
+        img {
+          width: 38px;
+          height: 38px;
+          border-radius: 50px;
+          margin: 0px 6px;
+        }
+      }
+    }
+  
+    &_description {
+      width: 100%;
+      margin: 5px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+  
+      p {
+        text-align: left;
+      }
+  
+      textarea {
+        resize: none;
+        height: 300px;
+        width: 95%;
+        outline: none;
+        padding: 10px 10px;
+        border: 1px solid #88888883;
+        outline: none;
+        border-radius: 5px;
+      }
+    }
+  
+    &_button {
+      text-align: center;
+      width: 100%;
+      position: relative;
+      padding: 10px 0px;
+  
+      button {
+        background-color: #55ce63;
+        border: none;
+        outline: none;
+        padding: 8px 25px;
+        border-radius: 2px;
+        color: white;
+        transition: 0.3ms ease;
+        cursor: pointer;
+        font-size: 20px;
+        border-radius: 20px;
+      }
+  
+      button:hover {
+        background-color: #69d876;
+      }
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .addArticle_inner {
+      width: 90%;
+    }
+  
+    .addArticle_inputWrapper {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+    .addArticle_inputWrapper div {
+      margin: 5px 20px;
+    }
+  
+    .addArticle_button {
+      position: relative;
+      margin-top: 40px;
+      top: -20px;
+    }
+  }
+  

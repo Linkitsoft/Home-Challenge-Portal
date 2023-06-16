@@ -1,0 +1,123 @@
+.dateFilter {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  background-color: rgba(17, 17, 17, 0.425);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+
+  &_inner {
+    position: relative;
+    width: 360px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    align-items: center;
+    height: 420px;
+  }
+
+  &_inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  &_topHead {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+
+    p {
+      margin: 0;
+      font-size: 25px;
+      font-weight: 600;
+      color: #202425;
+    }
+  }
+
+  &_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: -15px;
+  }
+
+  &_selectWrap {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0px;
+
+    p {
+      margin: 5px 0px !important;
+      color: rgba(93, 101, 102, 0.81);
+      font-weight: 400 !important;
+    }
+
+    input {
+      border: 1px solid rgba(93, 101, 102, 0.81);
+      padding: 10px 20px;
+      color: rgba(93, 101, 102, 0.81);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    select {
+      border: 1px solid rgba(93, 101, 102, 0.81);
+      padding: 10px 20px;
+      color: rgba(93, 101, 102, 0.81);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    input::placeholder {
+      font-weight: 300 !important;
+    }
+  }
+
+  &_reset {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+    margin-top: 25px;
+
+    p {
+      margin: 0 !important;
+      color: rgba(93, 101, 102, 0.81);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #0166B3;
+      color: white;
+      font-weight: bold;
+      padding: 8px 45px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      transition: 0.3ms ease-in;
+    }
+
+    button:hover {
+      background-color: #095e9e;
+    }
+  }
+
+  @media (max-width: 600px) {
+    &_inner {
+      width: 80%;
+    }
+  }
+}

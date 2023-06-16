@@ -1,0 +1,223 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+  background: #59A0D5;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+
+  .logo {
+    width: 200px;
+    margin: 20px 0px;
+  }
+
+  &_emailValid {
+    width: 100%;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #f8696a;
+    }
+  }
+
+  &_box {
+    width: 425px;
+    /* height: 600px; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 20px;
+    align-items: center;
+    background-color: white;
+  }
+
+  &_label {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    position: relative;
+    top: 15px;
+    color: gray;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  &_topHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0px;
+    margin: 15px 0px;
+
+    img {
+      width: 40%;
+    }
+
+    p {
+      color: #222e50;
+      font-weight: 650;
+      margin-top: 0px;
+      font-size: 25px;
+      position: relative;
+    }
+  }
+
+  &_inputSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+    position: relative;
+    // margin-top: -30px;
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  &_head {
+    color: #222e50;
+    font-weight: 700;
+    font-size: 20px;
+    position: relative;
+    text-align: center;
+    top: 18px;
+  }
+
+  &_inputWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px 20px;
+      /* padding-left: 50px; */
+      padding-right: 15px;
+      border: none;
+      outline: none;
+      border-radius: 4px;
+      margin: 12px 0px;
+      box-shadow: 0px 0px 6px -1px grey;
+      font-weight: 500;
+      position: relative;
+      font-size: 16px;
+      color: black;
+    }
+
+    select {
+      text-transform: capitalize;
+    }
+
+    input::placeholder {
+      color: rgb(56, 55, 55);
+      font-weight: 450;
+    }
+
+    input:focus {
+      box-shadow: 0px 0px 7px -2px rgb(92, 92, 92);
+    }
+
+    .emailIcon {
+      position: absolute;
+      left: 10px;
+      z-index: 99;
+      top: 30px;
+      /* font-size: 22px; */
+      color: #749aa9;
+      width: 22px;
+    }
+
+    .passIcon {
+      position: absolute;
+      left: 10px;
+      z-index: 99;
+      top: 23px;
+      /* font-size: 22px; */
+      color: #749aa9;
+      width: 18px;
+    }
+
+    .showEye {
+      position: absolute;
+      right: 10px;
+      top: 25px;
+      color: #749aa9;
+      cursor: pointer;
+      z-index: 999;
+    }
+  }
+
+  &_changePassword {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 65%;
+
+    p {
+      font-size: 12px;
+      color: #8f9392;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3ms ease-in;
+    }
+
+    p:hover {
+      color: #747474;
+      font-weight: 600;
+    }
+  }
+
+  &_loginBtn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0px;
+
+    button {
+      padding: 8px 79px;
+      background: #0166B3;
+      font-weight: 650;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 18px;
+      text-align: center;
+      transition: 0.2ms ease-in;
+    }
+    button:hover {
+      background: #0763a8;
+    }
+  }
+
+  &_needAccount {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 5px 0;
+    padding: 4px 0;
+
+    p {
+      margin: 0;
+      cursor: pointer;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    &_box {
+      width: 100%;
+    }
+  }
+}
