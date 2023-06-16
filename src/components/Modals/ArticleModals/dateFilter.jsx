@@ -25,7 +25,12 @@ const DateFilter = ({ setModal }) => {
           </div>
           <div className="dateFilter_wrapper">
             <div className="dateFilter_selectWrap">
-              <p>Date</p>
+              <p>From Date</p>
+              <input type="date" placeholder="Date" />
+            </div>
+
+            <div className="dateFilter_selectWrap">
+              <p>To Date</p>
               <input type="date" placeholder="Date" />
             </div>
 

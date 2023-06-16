@@ -53,7 +53,7 @@ const Signup = () => {
           <p className="login_head">
             Welcome! Please <br /> Signup to continue{" "}
           </p>
-          <label className="login_label">Name</label>
+          <label className="login_label">Full Name</label>
           <div className="login_inputWrapper">
             <input
               type="text"
@@ -125,7 +125,7 @@ const Signup = () => {
           </div>
 
           <div className="login_loginBtn">
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogin}>Signup</button>
           </div>
         </div>
       </div>
