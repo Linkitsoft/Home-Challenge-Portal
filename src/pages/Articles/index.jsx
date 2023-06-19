@@ -166,15 +166,13 @@ const Articles = () => {
                     <option value={2}>The Guardians</option>
                   </select>
                 </div>
-                <div>
-                  <div className="article_lableSection">
-                    <p>Pick Start Date</p>
-                    <input
-                      onChange={(e) => setStartDate(e?.target?.value)}
-                      type="date"
-                      value={startDate}
-                    />
-                  </div>
+                <div className="article_lableSection">
+                  <p>Pick Start Date</p>
+                  <input
+                    onChange={(e) => setStartDate(e?.target?.value)}
+                    type="date"
+                    value={startDate}
+                  />
                 </div>
                 <div className="article_lableSection">
                   <p>Pick End Date</p>
