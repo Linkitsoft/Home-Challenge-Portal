@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "../../components/Sidebar";
 import { toast } from "react-toastify";
-import ArticleCards from "../../components/ArticleCard";
+import ArticleCards from "../../components/TheGuardianCard";
 import DateFilter from "../../components/Modals/ArticleModals/dateFilter";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import fromDate from "../../components/fromDate";
 import toDate from "../../components/toDate";
 import moment from "moment";
+import NewYorkCard from "../../components/NewYorkCard";
+import TheGuardianCard from "../../components/TheGuardianCard";
 
 const Articles = () => {
   const [modal, setModal] = useState("");
-  const [source, setSource] = useState(2);
+  const [source, setSource] = useState(3);
   const [dataToShow, setDataToShow] = useState([]);
   const [dataToShow2, setDataToShow2] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -25,6 +27,8 @@ const Articles = () => {
   const [loader1, setLoader1] = useState(false);
   const [loader2, setLoader2] = useState(false);
   const [osama, setOsama] = useState([]);
+  const [dataToShow3, setDataToShow3] = useState([]);
+  const [dataToShow4, setDataShow4] = useState([]);
 
   // start month
   const startOfMonth = new Date(currentYear, currentMonth, 1);
@@ -71,6 +75,39 @@ const Articles = () => {
           setLoader2(!loader1);
         })
         .catch((error) => {});
+    } else if (source == 3) {
+      // All data
+      // NewYork-Times Api
+      axios
+        .get(
+          `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&begin_date=${fromDate(
+            startDate ? startDate : startOfMonth
+          )}&end_date=${toDate(endDate ? endDate : endOfMonth)}&page=${
+            currentPage + 1
+          }&api-key=6AQXiaitngsz6XUXYdJ1N3Ay6ADj5soO`
+        )
+        .then((response) => {
+          setDataToShow3(response?.data?.response?.docs);
+          setLoader2(!loader1);
+        })
+        .catch((error) => {});
+
+      // Guardians Api
+      axios
+        .get(
+          `https://content.guardianapis.com/search?q=${category}&page=${
+            currentPage + 1
+          }&from-date=${moment(startDate ? startDate : startOfMonth).format(
+            "YYYY-MM-DD"
+          )}&to-date=${moment(endDate ? endDate : endOfMonth).format(
+            "YYYY-MM-DD"
+          )}&api-key=4618d8df-d062-4a0d-81d5-9a8bf7bbead9`
+        )
+        .then((response) => {
+          setDataShow4(response?.data?.response?.results);
+          setLoader2(!loader1);
+        })
+        .catch((error) => {});
     }
   }, [source, category, startDate, endDate, currentPage]);
 
@@ -93,6 +130,24 @@ const Articles = () => {
           )
         : temp;
       setOsama(state);
+    } else if (source == 3) {
+      const temp = dataToShow;
+      const state = searchValue
+        ? dataToShow?.filter((user) =>
+            user?.headline?.main
+              ?.toLowerCase()
+              .includes(searchValue?.toLowerCase())
+          )
+        : temp;
+      setDataToShow3(state);
+
+      const temp2 = dataToShow2;
+      const state2 = searchValue
+        ? dataToShow2?.filter((user) =>
+            user?.webTitle?.toLowerCase().includes(searchValue?.toLowerCase())
+          )
+        : temp2;
+      setDataShow4(state2);
     }
   }, [searchValue]);
 
@@ -100,13 +155,17 @@ const Articles = () => {
     if (dataToShow || dataToShow2) {
       if (source == 1) {
         setOsama(dataToShow);
-      } else {
+      } else if (source == 2) {
         setOsama(dataToShow2);
+      } else if (source == 3) {
+        setDataToShow3(dataToShow3);
+        setDataShow4(dataToShow4);
       }
     }
-  }, [source, dataToShow, dataToShow2]);
+  }, [source, dataToShow, dataToShow2, dataToShow3, dataToShow4]);
 
-  console.log("osama", osama);
+  console.log("dataToShow3", dataToShow3);
+  console.log("dataToShow4", dataToShow4);
 
   return (
     <>
@@ -162,6 +221,7 @@ const Articles = () => {
                     <option value={""} disabled>
                       Select Source
                     </option>
+                    <option value={3}>All</option>
                     <option value={1}>New York Times</option>
                     <option value={2}>The Guardians</option>
                   </select>
@@ -203,12 +263,7 @@ const Articles = () => {
                 ) : (
                   osama?.map((item, index) => {
                     return (
-                      <ArticleCards
-                        source={1}
-                        key={index}
-                        item={item}
-                        index={index}
-                      />
+                      <NewYorkCard key={index} item={item} index={index} />
                     );
                   })
                 ))}
@@ -218,17 +273,22 @@ const Articles = () => {
                   <h2>No Data Found</h2>
                 ) : (
                   osama?.map((arr, i) => {
-                    return (
-                      <ArticleCards source={2} key={i} item={arr} index={i} />
-                    );
+                    return <TheGuardianCard key={i} item={arr} index={i} />;
                   })
                 ))}
 
-              {/* {source === 2 && dataToShowFilter2?.map((item, index) =>
-               (
-                <ArticleCards key={index} item={item} index={index} />
-              ))
-              } */}
+              {/* All */}
+              {source == 3 &&
+                dataToShow3?.map((item, index) => {
+                  return <NewYorkCard key={index} item={item} index={index} />;
+                })}
+
+              {source == 3 &&
+                dataToShow4?.map((arr, i) => {
+                  return <TheGuardianCard key={i} item={arr} index={i} />;
+                })}
+
+              {/* All End */}
             </div>
 
             <div className="article_paginationWrapper">
@@ -239,7 +299,7 @@ const Articles = () => {
                   pageCount={
                     source == 1
                       ? dataToShow?.length || 1
-                      : dataToShow2?.length || 1
+                      : dataToShow2?.length || 1 && source == 3 ? dataToShow4?.length + dataToShow3?.length : 1
                   }
                   activeClassName="active"
                   forcePage={currentPage}

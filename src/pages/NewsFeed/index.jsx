@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import { toast } from "react-toastify";
-import ArticleCards from "../../components/ArticleCard";
+// import ArticleCards from "../../components/ArticleCard";
 import { useDispatch, useSelector } from "react-redux";
 import CustomizeNewsFeed from "../../components/Modals/ArticleModals/customizeNewsFeed";
 import ReactPaginate from "react-paginate";
-import NewsFeedCard from "../../components/NewsFeedCard";
+// import NewsFeedCard from "../../components/NewsFeedCard";
 
 const NewsFeed = () => {
   const [modal, setModal] = useState("");
@@ -43,13 +43,13 @@ const NewsFeed = () => {
               </div>
             </div>
             <div className="article_parent">
-              {ArticleData.map((item, index) => (
+              {/* {ArticleData.map((item, index) => (
                 <NewsFeedCard
                   key={index}
                   item={item}
                   index={index}
                 />
-              ))}
+              ))} */}
             </div>
             <div className="article_paginationWrapper">
               <div>
