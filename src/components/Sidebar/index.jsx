@@ -36,7 +36,7 @@ const Sidebar = ({ index }) => {
                 index === 2 ? "sideBar_title sideBar_active" : "sideBar_title"
               }
             >
-              <i className="fas fa-newspaper"></i>Articles
+              <i className="fas fa-newspaper"></i>Articles & News Feed
             </div>
             {/* <div
               onClick={() => handleRoute("newsFeed")}

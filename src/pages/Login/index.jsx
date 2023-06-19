@@ -15,26 +15,31 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const body = {
-      email: formData?.email,
-      password: formData?.password
-    }
-    if (!formData.email || !formData.password) {
-      toast.error("All fields are required");
-    } else if (!formData?.email?.match(regexEmail)) {
-      setEmailValid(true);
-    } else {
-      const res = await instance.post("signin", body)
-      if (res?.data?.response) {
-        window.localStorage.setItem("isLogged", "authorize");
-        window.localStorage.setItem("token", res?.data?.token);
-        window.location.reload();
-        navigate("/articles")
-      }else if(res?.data?.message === "Invalid User Credentials"){
-        toast.error("Invalid User Credentials")
+    try {
+      let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      const body = {
+        email: formData?.email,
+        password: formData?.password
       }
+      if (!formData.email || !formData.password) {
+        toast.error("All fields are required");
+      } else if (!formData?.email?.match(regexEmail)) {
+        setEmailValid(true);
+      } else {
+        const res = await instance.post("signin", body)
+        if (res?.data?.response) {
+          window.localStorage.setItem("isLogged", "authorize");
+          window.localStorage.setItem("token", res?.data?.token);
+          window.location.reload();
+          navigate("/articles")
+        }else if(res?.data?.message === "Invalid User Credentials"){
+          toast.error("Invalid User Credentials")
+        }
+      }
+    } catch (err) {
+      toast.error("Some Error Occured")
     }
+   
   };
 
   return (

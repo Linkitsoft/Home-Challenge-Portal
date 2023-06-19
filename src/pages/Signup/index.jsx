@@ -16,33 +16,37 @@ const Signup = () => {
   };
 
   const handleLogin = async () => {
-    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const body = {
-      name: formData?.name,
-      email: formData?.email,
-      contact: formData?.contact,
-      password: formData?.password,
-    };
-    if (
-      !formData?.name ||
-      !formData.email ||
-      !formData.password ||
-      !formData.contact
-    ) {
-      toast.error("All fields are required");
-    } else if (formData?.password !== formData?.confirmPassword) {
-      toast.error("Please Confirm The Password");
-    } else if (!formData?.email?.match(regexEmail)) {
-      setEmailValid(true);
-    } else {
-      const res = await instance.post("signUp", body);
-      if (res?.data?.message === "User registered Successfully.") {
-        navigate("/login");
-        toast.success("User registered Successfully")
-      } if (res?.data?.message === "User already exists.") {
-        toast.warning("User already exists")
+    try {
+      let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      const body = {
+        name: formData?.name,
+        email: formData?.email,
+        contact: formData?.contact,
+        password: formData?.password,
+      };
+      if (
+        !formData?.name ||
+        !formData.email ||
+        !formData.password ||
+        !formData.contact
+      ) {
+        toast.error("All fields are required");
+      } else if (formData?.password !== formData?.confirmPassword) {
+        toast.error("Please Confirm The Password");
+      } else if (!formData?.email?.match(regexEmail)) {
+        setEmailValid(true);
+      } else {
+        const res = await instance.post("signUp", body);
+        if (res?.data?.message === "User registered Successfully.") {
+          navigate("/login");
+          toast.success("User registered Successfully");
+        }
+        if (res?.data?.message === "User already exists.") {
+          toast.warning("User already exists");
+        }
       }
-      console.log("res", res)
+    } catch (err) {
+      toast.error("Some Error Occured");
     }
   };
 

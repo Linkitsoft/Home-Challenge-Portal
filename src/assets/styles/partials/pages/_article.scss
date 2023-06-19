@@ -19,6 +19,7 @@
     padding: 15px;
     margin: 10px 0;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    max-height: 330px;
   }
 
   &_paginationWrapper {
@@ -61,6 +62,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
 
     img {
       width: 40px;
@@ -76,13 +78,23 @@
       border: none;
       border: 1px solid rgb(134, 134, 134);
       border-radius: 4px;
-      margin: 5px 5px;
+      // margin: 5px 5px;
     }
 
     select {
-      padding: 5px 20px;
-      margin : 0px 10px;
+      padding: 10px 20px;
+      // margin: 0px 10px;
       outline: none;
+    }
+  }
+
+  &_lableSection {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    p {
+      margin: 0;
     }
   }
 
@@ -299,5 +311,15 @@
 
   &_btn:hover {
     background-color: #1d3f21;
+  }
+}
+
+@media (max-width: 800px) {
+  .article_left select,
+  .article_right select {
+    padding: 10px 20px;
+    margin: 4px 5px;
+    width: 100%;
+    outline: none;
   }
 }
