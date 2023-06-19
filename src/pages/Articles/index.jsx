@@ -2,12 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import Sidebar from "../../components/Sidebar";
 import { toast } from "react-toastify";
 import ArticleCards from "../../components/ArticleCard";
-import { useDispatch, useSelector } from "react-redux";
 import DateFilter from "../../components/Modals/ArticleModals/dateFilter";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import fromDate from "../../components/fromDate";
 import toDate from "../../components/toDate";
+import moment from "moment";
 
 const Articles = () => {
   const [modal, setModal] = useState("");
@@ -44,7 +44,7 @@ const Articles = () => {
     if (source == 1) {
       // NewYork-Times Api
       setLoader(true)
-      axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&begin_date=${fromDate(startDate ? startDate : startOfMonth)}&end_date=${toDate(endDate ? endDate : endOfMonth)}&page=${currentPage + 1}&api-key=6AQXiaitngsz6XUXYdJ1N3Ay6ADj5soO      `)
+      axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&begin_date=${fromDate(startDate ? startDate : startOfMonth)}&end_date=${toDate(endDate ? endDate : endOfMonth)}&page=${currentPage + 1}&api-key=6AQXiaitngsz6XUXYdJ1N3Ay6ADj5soO`)
         .then(response => {
           setLoader(false)
           setDataToShow(response?.data?.response?.docs)
@@ -54,7 +54,7 @@ const Articles = () => {
     } else if (source == 2) {
       // Guardians Api
       setLoader(true)
-      axios.get(`https://content.guardianapis.com/search?page=${currentPage + 1}&q=debate&tag=politics/politics&from-date=2017-01-01&api-key=4618d8df-d062-4a0d-81d5-9a8bf7bbead9`)
+      axios.get(`https://content.guardianapis.com/search?q=${category}&page=${currentPage + 1}&from-date=${moment(startDate).format("YYYY-MM-DD")}&to-date=${moment(endDate).format("YYYY-MM-DD")}&api-key=4618d8df-d062-4a0d-81d5-9a8bf7bbead9`)
         .then(response => {
           setLoader(false)
           setDataToShow2(response?.data?.response?.results)
@@ -150,7 +150,7 @@ const Articles = () => {
                 <ReactPaginate
                   previousLabel="<"
                   nextLabel=">"
-                  pageCount={source == 1 ? dataToShow?.length || 1 : dataToShow2?.length || 1 }
+                  pageCount={source == 1 ? dataToShow?.length || 1 : dataToShow2?.length || 1}
                   activeClassName="active"
                   forcePage={currentPage}
                   onPageChange={(page) =>
