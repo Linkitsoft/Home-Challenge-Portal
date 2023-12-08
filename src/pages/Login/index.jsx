@@ -1,108 +1,75 @@
 import React from "react";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import instance from "../../Instance/instance";
+import { useState, useEffect } from "react";
+import signal from "../../assets/radio.png"
+import girl from "../../assets/girl.png"
 
 const Login = () => {
-  const [eyeIcon, setEyeIcon] = useState(false);
-  const [formData, setFormData] = useState({});
-  const navigate = useNavigate();
-  const [emailValid, setEmailValid] = useState(false);
 
-  const handleInput = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [userList, setUserList] = useState([]);
+  const [selected, setSelected] = useState({})
+  const [indexS, setIndexS] = useState(-1)
+
+  useEffect(() => {
+    // Generate user data (replace this with your actual user data)
+    const generateUserList = () => {
+      const numberOfUsers = 7; // Change this to the actual number of users
+      const userList = [];
+
+      for (let i = 0; i < numberOfUsers; i++) {
+        userList.push({
+          id: i,
+          profilePicture: girl, // Replace with the path to your user's profile picture
+        });
+      }
+
+      return userList;
+    };
+
+    setUserList(generateUserList());
+  }, []);
+
+  const calculateUserPosition = (index, totalUsers) => {
+    const angle = (index / totalUsers) * 360; // Calculate the angle for each user
+    const radius = 132; // Adjust this value based on your design
+    const x = radius * Math.cos((angle * Math.PI) / 180);
+    const y = radius * Math.sin((angle * Math.PI) / 180);
+
+    return { x, y };
   };
 
-  const handleLogin = async () => {
-    try {
-      let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      const body = {
-        email: formData?.email,
-        password: formData?.password
-      }
-      if (!formData.email || !formData.password) {
-        toast.error("All fields are required");
-      } else if (!formData?.email?.match(regexEmail)) {
-        setEmailValid(true);
-      } else {
-        const res = await instance.post("signin", body)
-        if (res?.data?.response) {
-          window.localStorage.setItem("isLogged", "authorize");
-          window.localStorage.setItem("token", res?.data?.token);
-          window.location.reload();
-          navigate("/articles")
-        }else if(res?.data?.message === "Invalid User Credentials"){
-          toast.error("Invalid User Credentials")
-        }
-      }
-    } catch (err) {
-      toast.error("Some Error Occured")
-    }
-   
-  };
 
   return (
-    <div className="login">
-      <div className="login_box">
-        <div className="login_inputSection">
-          <p className="login_head">
-            Welcome! Please <br /> Login to continue{" "}
-          </p>
-          <label className="login_label">Email</label>
-          <div className="login_inputWrapper">
-            <input
-              type="text"
-              placeholder="Email"
-              name="email"
-              onChange={handleInput}
-            />
-          </div>
-
-          {emailValid && (
-            <div className="login_emailValid">
-              <p>* Email is not Valid *</p>{" "}
-            </div>
-          )}
-
-          <label className="login_label">Password</label>
-          <div className="login_inputWrapper">
-            <input
-              type={!eyeIcon ? "password" : "text"}
-              name="password"
-              placeholder="Password"
-              onChange={handleInput}
-            />
-            <i
-              onClick={() => setEyeIcon(!eyeIcon)}
-              className={
-                eyeIcon === false
-                  ? "fas fa-eye-slash showEye"
-                  : "fas fa-eye showEye"
-              }
-            ></i>
-          </div>
-          {/* <label className="login_label">Select Role</label>
-          <div className="login_inputWrapper">
-            <select name="role" onChange={handleInput}>
-              <option value="" disabled selected>
-                Choose a role
-              </option>
-              {RoleData.map((role) => (
-                <option key={role.roleId} value={role.name}>
-                  {role.name}
-                </option>
-              ))}
-            </select>
-          </div> */}
-          <div className="login_needAccount">
-            <p onClick={() => navigate("/signup")}>Don't have an account?</p>
-          </div>
-          <div className="login_loginBtn">
-            <button onClick={handleLogin}>Login</button>
-          </div>
+    <div className="signal">
+      <div className="signal_box">
+        <div className="signal_circle">
+          <img src={signal} alt="signal" />
+          {userList.map((user, index) => {
+            const { x, y } = calculateUserPosition(index, userList.length);
+            return (
+              <div
+                onClick={() => { setSelected(user); setIndexS(index) }}
+                key={user.id}
+                className="user_icon"
+                style={{ position: 'absolute', top: `calc(50% - 40px + ${y}px)`, left: `calc(50% - 40px + ${x}px)` }}
+              >
+                <img className={index === indexS && "selectImg"} src={girl} alt={`user-${user.id}`} />
+              </div>
+            );
+          })}
         </div>
+
+        {selected &&
+          <div className="signal_bottomSec">
+            <div className="signal_text">
+              <img src={girl} alt="img" />
+              <p className="name">John</p>
+              <p className="phone">+2323 2323232</p>
+              <button>Choose</button>
+            </div>
+          </div>
+        }
       </div>
+
     </div>
   );
 };
