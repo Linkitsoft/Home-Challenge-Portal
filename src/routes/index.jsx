@@ -17,23 +17,23 @@ const MyRoutes = () => {
       <div className="background">
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/login" element={<Login />}></Route>
-            {/* {isLogged ? (
-              // <Route path="/articles" element={<Articles />}></Route>
-            ): (
-              )} */}
+            {isLogged ? (
+              <Route path="/login" element={<Login />}></Route>
+            ) : (
+              <Route path="/login" element={<Login />}></Route>
+            )}
             {/* {!isLogged ? (<Route path="/login" element={<Login />} : <Route path="/login" element={<Login />})/>} */}
             {/* <Route path="/signup" element={<Signup />} /> */}
-            {/* <Route
+            <Route
               path="*"
               element={
                 isLogged ? (
-                  <Navigate to="/articles" replace />
+                  <Navigate to="/login" replace />
                 ) : (
                   <Navigate to="/login" replace />
                 )
               }
-            /> */}
+            />
             {/* <Route element={<PrivateRoute isLogged={isLogged} />}>
               <Route path="/articles" element={<Articles />} />
               <Route path="/newsFeed" element={<NewsFeed />} />
